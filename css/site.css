@@ -1,0 +1,102 @@
+/* set-up working colours  */
+:root {
+    --primary-color: #1d5888;
+    --secondary-color: #ff993b;
+    --dark-color: #292929;
+    --white-color: #dff3e4;
+    --redhighlight-color: rgb(207, 12, 12);
+    --black-color: rgb(0, 0, 0);
+}
+
+/* Setting up the body colour */
+body {
+    color: var(--dark-color);
+}
+
+/* Navigation Colour */
+nav {
+    background-color: var(--black-color);
+}
+
+/* Footer Colour */
+footer {
+    background-color: var(--black-color);
+}
+
+/* Heading Color */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--primary-color)
+}
+
+main .button>a:hover {
+    opacity: 0.9;
+    color: var(--white-color);
+}
+
+/* Footer */
+footer {
+    padding-right: 1rem;
+}
+
+.sticky-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+footer .social>a {
+    color: var(--white-color);
+    opacity: 0.75;
+}
+
+footer .social>a:hover {
+    opacity: 0.9;
+    color: var(--primary-color);
+}
+
+
+/* Font Awesome Icon Colours*/
+
+.bsicon {
+    color: purple;
+}
+
+.jsicon {
+    color: rgb(226, 221, 4);
+}
+
+.html5icon {
+    color: orangered;
+}
+
+
+.css3icon {
+    color: rgb(11, 82, 214);
+}
+
+.checklist :li i {
+    color: var(-secondary-color);
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+
+main>.container {
+    padding: 60px 15px 0;
+}
+
+
+.even {
+    font-weight: bold;
+}
