@@ -94,8 +94,8 @@ function buildDropDown() {
     //retreiving the template
     let ddTemplate = document.getElementById("cityDD-template");
 
-
-    let curEvents = events;
+    //get data from local storage OR from display data
+    let curEvents = JSON.parse(localStorage.getItem("eventData")) || events;
 
     // returns an array of uniquely identitifed events
     let distinctEvents = [...new Set(curEvents.map((event) => event.city))];
@@ -190,7 +190,8 @@ function getEvents(ddElement) {
 
     let cityName = ddElement.getAttribute("data-string");
 
-    let curEvents = events;
+    //get data from local storage OR from display data
+    let curEvents = JSON.parse(localStorage.getItem("eventData")) || events;
 
     let filteredEvents = curEvents;
 
@@ -237,5 +238,32 @@ function displayData() {
         //Add the items into
         eventBody.appendChild(eventRow);
     }
+
+}
+
+//Save Event Data to Local Storage
+function saveData() {
+
+
+    let curEvents = JSON.parse(localStorage.getItem("eventData")) || events;
+
+    let stateSelect = document.getElementById("addEventState");
+
+    let eventDate = document.getElementById("addEventDate");
+
+    let newEvent = {
+        event: document.getElementById("addEventName").value,
+        city: document.getElementById("addCity").value,
+        state: stateSelect.options[stateSelect.selectedIndex].text,
+        attendance: parseInt(document.getElementById("addAttendance").value, 10),
+        date: new Date(eventDate).toLocaleDateString()
+    };
+
+    curEvents.push(newEvent);
+
+    localStorage.setItem("eventData", JSON.stringify(curEvents));
+
+    buildDropDown();
+    displayData();
 
 }

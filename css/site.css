@@ -11,6 +11,15 @@
 /* Setting up the body colour */
 body {
     color: var(--dark-color);
+
+    /* UI Gradients */
+    background: #8e9eab;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #eef2f3, #8e9eab);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #eef2f3, #8e9eab);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 /* Navigation Colour */
@@ -33,10 +42,6 @@ h6 {
     color: var(--primary-color)
 }
 
-main .button>a:hover {
-    opacity: 0.9;
-    color: var(--white-color);
-}
 
 /* Footer */
 footer {
@@ -44,7 +49,7 @@ footer {
 }
 
 .sticky-footer {
-    position: fixed;
+    position:fixed;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -94,8 +99,19 @@ pre[class*="language-"] {
 
 main>.container {
     padding: 60px 15px 0;
+    margin-bottom: 200px;
 }
 
+main .button>a:hover {
+    opacity: 0.9;
+    color: var(--white-color);
+}
+
+.mainContainer{
+    height: 95vh;
+    display: block;
+    overflow-y: scroll; 
+}
 
 .even {
     font-weight: bold;

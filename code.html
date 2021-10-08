@@ -73,22 +73,93 @@
                     <!-- My CODE -->
                     <pre class="line-numbers">
                         <code class="language-javascript">
-                            function displayMessage() {
-                            let msg = "";
+function buildDropDown() {
+    let eventDD = document.getElementById("eventDropDown");
 
-                            msg = document.getElementById("message").value;
+    eventDD.innerHTML = "";
 
-                            alert(msg);
-                            }
+    let ddTemplate = document.getElementById("cityDD-template");
+
+    let curEvents = JSON.parse(localStorage.getItem("eventData")) || events;
+
+    let distinctEvents = [...new Set(curEvents.map((event) => event.city))];
+
+    let ddItemNode = document.importNode(ddTemplate.content, true);
+
+    let ddItem = ddItemNode.querySelector("a");
+
+    ddItem.setAttribute("data-string", "All");
+
+ 
+    ddItem.textContent = "All";
+ 
+    eventDD.appendChild(ddItemNode);
+
+    for (let index = 0; index < distinctEvents.length; index++) { //get a new event (where to get the info,
+        nested==true) ddItemNode=document.importNode(ddTemplate.content, true); //what are we trying to change.. <a> tag
+        ddItem = ddItemNode.querySelector("a");
+
+          ddItem.setAttribute("data-string", distinctEvents[index]);
 
 
-                            function displayMessage2() {
-                            let msg = "";
+        ddItem.textContent = distinctEvents[index];
 
-                            msg = document.getElementById("message").value;
+        eventDD.appendChild(ddItemNode);
+        }
+        displayStats(curEvents);
+        displayData();
 
-                            Swal.fire(msg);
-                            }
+        }
+
+
+        function displayStats(filteredEvents) {
+
+        let total = 0;
+        let average = 0;
+        let most = 0;
+        let least = -1; // since we know this is not possible, this can be less than zero
+        let currentAttendance = 0;
+
+        for (let index = 0; index < filteredEvents.length; index++) {
+            currentAttendance=filteredEvents[index].attendance; total +=currentAttendance; if (most < currentAttendance)
+            { most=currentAttendance; } // if least is not set to -1 , v should be set to <=if (least> currentAttendance
+            || least < 0) { least=currentAttendance; } // calculate average average=total / filteredEvents.length; }
+                document.getElementById("total").innerHTML=total.toLocaleString();
+                document.getElementById("most").innerHTML=most.toLocaleString();
+                document.getElementById("average").innerHTML=average.toLocaleString( undefined, { minimumFractionDigits:
+                0, maximumFractionDigits: 0 } ); document.getElementById("least").innerHTML=least.toLocaleString();
+                } //get the events for the selected City function getEvents(ddElement) { let
+                cityName=ddElement.getAttribute("data-string"); //get data from local storage OR from display data let
+                curEvents=JSON.parse(localStorage.getItem("eventData")) || events; let filteredEvents=curEvents;
+                document.getElementById("statsHeader").innerHTML=`Stats for ${cityName} Events`; if (cityName !="All" )
+                { filteredEvents=curEvents.filter(function (item) { if (item.city==cityName) { return (item); } }) }
+                displayStats(filteredEvents); } // Display lower table (current events)=> gets called in buildDropDown()
+                function displayData() {
+                let template = document.getElementById("eventData-template");
+                let eventBody = document.getElementById("eventBody");
+
+                //clearing out after page-load
+                eventBody.innerHTML = "";
+
+                // Default data
+                let curEvents = events;
+
+                for (let index = 0; index < curEvents.length; index++) { // copy of arow template let
+                    eventRow=document.importNode(template.content, true); // getting an array of columns let
+                    eventCols=eventRow.querySelectorAll("td"); // defining the array
+                    eventCols[0].textContent=curEvents[index].event; eventCols[1].textContent=curEvents[index].city;
+                    eventCols[2].textContent=curEvents[index].state;
+                    eventCols[3].textContent=curEvents[index].attendance; eventCols[4].textContent=new Date(
+                    curEvents[index].date).toLocaleDateString(); //Add the items into eventBody.appendChild(eventRow); }
+                    } //Save Event Data to Local Storage function saveData(){ let
+                    curEvents=JSON.parse(localStorage.getItem("eventData")) || events; let
+                    stateSelect=document.getElementById("addEventState"); let
+                    eventDate=document.getElementById("addEventDate"); let newEvent={ event:
+                    document.getElementById("addEventName").value, city: document.getElementById("addCity").value,
+                    state: stateSelect.options[stateSelect.selectedIndex].text, attendance:
+                    parseInt(document.getElementById("addAttendance").value,10), date: new
+                    Date(eventDate).toLocaleDateString() }; curEvents.push(newEvent); localStorage.setItem("eventData",
+                    JSON.stringify(curEvents)); buildDropDown(); displayData(); }
                         </code>
                     </pre>
                 </div>
@@ -107,7 +178,6 @@
     <footer class="footer mt-auto py-3 sticky-footer">
         <div class="container-fluid">
             <div class="row row-cols-1 row-cols-lg-3">
-
                 <div class="col">
                     <div>
                         <span class="text-muted">&copy2021</span>Belinda Tiberio | careers@belindatiberio.com
@@ -123,7 +193,6 @@
                         <div class="col social"><a href="#"><i class="fab fa-twitter fa-2x"></i></a></div>
                         <div class="col social"><a href="#"><i class="fab fa-youtube fa-2x"></i></a></div>
                     </div>
-
                 </div>
             </div>
         </div>
