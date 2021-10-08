@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="d-flex-column h-100">
+<body class="d-flex-column h-100" onload="buildDropDown()">
 
     <!-- Nav Section -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
@@ -66,34 +66,39 @@
             <div class="row">
                 <div class="col-12 col-md-6">
                     <div class="dropdown">
-                        <button id="cityDropDown" type="button" class="btn btn-secondary dropdown-toggle"
-                            data-bs-toggle="dropdown" aria-expanded="false" data-bs-offset="10,20">Choose a
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false" data-bs-offset="10,20">Choose a
                             City</button>
+                        <ul id="eventDropDown" class="dropdown-menu" aria-labelledby="eventDropDown">
+                            <!-- CITY DROPDOWN INFO HERE -->
+                        </ul>
                     </div>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                    <table class="table table-striped table-hover">
-                        <tr>
-                            <th colspan="2" id="statsHeader">Stats for All Events</th>
-                        </tr>
-                        <tr>
-                            <td>Total Attendance</td>
-                            <td id="totalAtt">100</td>
-                        </tr>
-                        <tr>
-                            <td>Average Attendance</td>
-                            <td id="avgAtt">100</td>
-                        </tr>
-                        <tr>
-                            <td>Most Attendance</td>
-                            <td id="mostAtt">100</td>
-                        </tr>
-                    </table>
+                    <div class="col-12 col-md-6">
+
+                        <table class="table table-striped">
+                            <tr>
+                                <th colspan="2" id="statsHeader">Stats for All Events</th>
+                            </tr>
+                            <tr>
+                                <td>Total Attendance</td>
+                                <td id="total">100</td>
+                            </tr>
+                            <tr>
+                                <td>Average Attendance</td>
+                                <td id="average">100</td>
+                            </tr>
+                            <tr>
+                                <td>Most Attendance</td>
+                                <td id="most">100</td>
+                            </tr>
+                            <tr>
+                                <td>Most Attendance</td>
+                                <td id="least">100</td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
-                    <div class="col-12 col-md-6 order-first order-md-last">
+                <div class="col-12 col-md-6 order-first order-md-last">
                     <img src="img/TheEvent.png" class="img-fluid p-2">
                 </div>
             </div>
@@ -151,10 +156,10 @@
 
 
 
-    <script>
+    <!-- <script>
         document.getElementById("BtnSubmit").addEventListener("click", displayMessage);
         document.getElementById("BtnSubmit2").addEventListener("click", displayMessage2);
-    </script>
+    </script> -->
 
 </body>
 
