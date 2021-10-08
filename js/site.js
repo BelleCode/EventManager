@@ -141,6 +141,9 @@ function buildDropDown() {
         //append the node to the dropdown
         eventDD.appendChild(ddItemNode);
     }
+    displayStats(curEvents);
+    displayData();
+
 
 }
 
@@ -151,7 +154,7 @@ function displayStats(filteredEvents) {
     let total = 0;
     let average = 0;
     let most = 0;
-    let least = 0;
+    let least = -1; // since we know this is not possible, this can be less than zero
     let currentAttendance = 0;
 
     for (let index = 0; index < filteredEvents.length; index++) {
@@ -162,7 +165,8 @@ function displayStats(filteredEvents) {
             most = currentAttendance;
         }
 
-        if (least > currentAttendance) {
+        // if least is not set to -1 ,         v should be set to <=
+        if (least > currentAttendance || least < 0) {
             least = currentAttendance;
         }
 
@@ -201,5 +205,37 @@ function getEvents(ddElement) {
         })
     }
     displayStats(filteredEvents);
+}
+
+// Display lower table (current events) => gets called in buildDropDown()
+function displayData() {
+    let template = document.getElementById("eventData-template");
+    let eventBody = document.getElementById("eventBody");
+
+    //clearing out after page-load
+    eventBody.innerHTML = "";
+
+    // Default data
+    let curEvents = events;
+
+    for (let index = 0; index < curEvents.length; index++) {
+
+        // copy of arow template
+        let eventRow = document.importNode(template.content, true);
+
+        // getting an array of columns
+        let eventCols = eventRow.querySelectorAll("td");
+
+        // defining the array
+        eventCols[0].textContent = curEvents[index].event;
+        eventCols[1].textContent = curEvents[index].city;
+        eventCols[2].textContent = curEvents[index].state;
+        eventCols[3].textContent = curEvents[index].attendance;
+        eventCols[4].textContent = new Date(
+            curEvents[index].date).toLocaleDateString();
+
+        //Add the items into
+        eventBody.appendChild(eventRow);
+    }
 
 }

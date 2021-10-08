@@ -62,9 +62,11 @@
     <!-- Main Section -->
     <main id="content" class="flex-shrink-0">
 
+        
         <div class="container-xxl p-5 mt-5">
             <div class="row">
-                <div class="col-12 col-md-6">
+                <div class="col-12 col-md-6 mb-3">
+                    <!-- dropdown button for Choosing a City -->
                     <div class="dropdown">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown"
                             aria-expanded="false" data-bs-offset="10,20">Choose a
@@ -92,7 +94,7 @@
                                 <td id="most">100</td>
                             </tr>
                             <tr>
-                                <td>Most Attendance</td>
+                                <td>Least Attendance</td>
                                 <td id="least">100</td>
                             </tr>
                         </table>
@@ -102,7 +104,30 @@
                     <img src="img/TheEvent.png" class="img-fluid p-2">
                 </div>
             </div>
+            <div class="row">
 
+                <div class="col-12 col-md-6 mb-3">
+                    <button type="button" class="btn btn-secondary">
+                        Add
+                    </button>
+                </div>
+                <div class="col-12 col-md-6">
+                    <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Event Name</th>
+                                <th>City</th>
+                                <th>State</th>
+                                <th>Attendance</th>
+                                <th>Event Date</th>
+                            </tr>
+                        </thead>
+                        <tbody id="eventBody">
+                            <!-- CONTENT GOES HERE -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -126,7 +151,6 @@
                         <div class="col social"><a href="#"><i class="fab fa-twitter fa-2x"></i></a></div>
                         <div class="col social"><a href="#"><i class="fab fa-youtube fa-2x"></i></a></div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -138,6 +162,16 @@
         <li>
             <a class="dropdown-item" onclick="getEvents(this)"></a>
         </li>
+    </template>
+
+    <template id="eventData-template">
+        <tr>
+            <td data-id="event"></td>
+            <td data-id="city"></td>
+            <td data-id="state"></td>
+            <td data-id="attendance"></td>
+            <td data-id="date"></td>
+        </tr>
     </template>
 
     <!-- Bootstrap JS Bundle -->
